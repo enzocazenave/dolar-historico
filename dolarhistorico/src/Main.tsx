@@ -1,10 +1,10 @@
-import { Text, TouchableWithoutFeedback, Keyboard, View } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { Navigation } from './navigation/Navigation'
 
 export const Main: React.FC = () => {
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            {/* TouchableWithoutFeedback is created with the intention of closing the keyboard if you press outside of it. */}
-            <View></View>
-        </TouchableWithoutFeedback>
+        <NavigationContainer>
+            <Navigation />
+        </NavigationContainer>
     )
 }
