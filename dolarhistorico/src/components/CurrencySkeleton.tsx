@@ -1,9 +1,16 @@
 import { ActivityIndicator, StyleSheet, View } from 'react-native'
 
-export const CurrencySkeleton: React.FC = () => {
+interface Props {
+    height?: number
+    backgroundColor?: string
+    color?: string
+    marginVertical?: number
+}
+
+export const CurrencySkeleton: React.FC<Props> = ({ height = 74, backgroundColor = '#fff', color = '#000', marginVertical = 0 }: Props) => {
     return (
-        <View style={styles.container}>
-            <ActivityIndicator color={'#000'} />
+        <View style={[styles.container, { height, backgroundColor, marginVertical }]}>
+            <ActivityIndicator color={color} />
         </View>
     )
 }
@@ -11,8 +18,6 @@ export const CurrencySkeleton: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 74,
-        backgroundColor: '#fff',
         borderRadius: 10,
         gap: 5,
         justifyContent: 'center'

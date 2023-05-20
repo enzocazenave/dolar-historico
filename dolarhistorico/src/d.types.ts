@@ -4,7 +4,8 @@ export interface Currency {
     venta: string
     fecha: string
     variacion: string
-    'class-variacion': string
+    'class-variacion': 'up' | 'down' | 'equal'
+    classVariacion: 'up' | 'down' | 'equal'
     valor_cierre_ant: string
     valorCierreAnterior: string
     valor?: string

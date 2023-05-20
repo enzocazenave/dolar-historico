@@ -8,25 +8,34 @@ interface useCurrencyMethods {
     data: any
 }
 
-export const useCurrency = ({ nombre, compra, venta }: Currency): useCurrencyMethods => {
+interface Props {
+    currency: Currency
+}
+
+export const useCurrency = ({ currency }: Props): useCurrencyMethods => {
     const [loading, setLoading] = useState<boolean>(true)
-    const [data, setData] = useState([])
+    const [data, setData] = useState({
+        semanal: []
+    })
     const [error, setError] = useState<string>('')
 
     useEffect(() => {
-        getCurrencyData()
+        getCurrencyData('semanal')
             .then((response) => {
-                setData(response)
+                setData((prevState) => ({
+                    ...prevState,
+                    semanal: response
+                }))
             })
             .finally(() => {
                 setLoading(false)
             })
     }, [])
 
-    const getCurrencyData: () => Promise<any | undefined> = async () => {
+    const getCurrencyData: (range: string) => Promise<any | undefined> = async (range: string) => {
         try {
-            const endpoint = CURRENCIES_ENDPOINTS.find((endpoint) => endpoint.startsWith(nombre))
-            const data = await fetch(`${API_URL}${endpoint?.split(':')[1]}grafico/semanal`)
+            const endpoint = CURRENCIES_ENDPOINTS.find((endpoint) => endpoint.startsWith(currency.nombre))
+            const data = await fetch(`${API_URL}${endpoint?.split(':')[1]}grafico/${range}`)
             const dataJson = await data.json()
             dataJson.shift()
 
@@ -40,6 +49,6 @@ export const useCurrency = ({ nombre, compra, venta }: Currency): useCurrencyMet
     return {
         loading,
         error,
-        data
+        data: data.semanal
     }
 }

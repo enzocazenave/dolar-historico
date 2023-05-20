@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { useCurrency } from '../hooks/useCurrency'
 import { type Currency } from '../d.types'
+import { Chart } from '../components'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export const CurrencyScreen: React.FC = () => {
     const { params } = useRoute<any>()
@@ -14,12 +16,21 @@ export const CurrencyScreen: React.FC = () => {
         })
     }, [])
 
-    const [currency, setCurrency] = useState<Currency>(params.currency)
-    const { loading, data } = useCurrency({ ...params.currency })
+    const [currency] = useState<Currency>(params.currency)
+    const { data } = useCurrency({ currency })
     const numericVariation = (parseFloat(currency.variacion.replace(',', '.')) * parseFloat(currency.valorCierreAnterior.replace(',', '.')) / 100).toFixed(2).replace('.', ',')
-    console.log(currency)
+
     return (
         <View style={styles.container}>
+            <View style={{ gap: 10 }}>
+
+                <Text style={styles.sectionTitle}>RESUMEN DE SEMANA</Text>
+                <View style={styles.section}>
+
+                </View>
+                <Chart data={data} classVariacion={currency.classVariacion} />
+            </View>
+
             <View style={{ gap: 10 }}>
                 <Text style={styles.sectionTitle}>RESUMEN DE JORNADA</Text>
                 <View style={styles.section}>
@@ -89,5 +100,18 @@ const styles = StyleSheet.create({
         color: '#aaa',
         fontWeight: '500',
         fontSize: 14
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        gap: 10
+    },
+    button: {
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        flex: 1
+    },
+    buttonText: {
+        padding: 10,
+        textAlign: 'center'
     }
 })
