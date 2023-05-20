@@ -5,7 +5,7 @@ const BottomTab = createBottomTabNavigator()
 
 export const Navigation: React.FC = () => {
     return (
-        <BottomTab.Navigator>
+        <BottomTab.Navigator screenOptions={{ headerShown: false }}>
             {tabItemConfigs.map((tabItem, index) => (
                 <BottomTab.Screen
                     key={index}

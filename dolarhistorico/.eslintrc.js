@@ -27,6 +27,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     'react-hooks/exhaustive-deps': 'off',
     '@typescript-eslint/strict-boolean-expressions': 'off',
-    '@typescript-eslint/restrict-template-expressions': 'off'
+    '@typescript-eslint/restrict-template-expressions': 'off',
+    '@typescript-eslint/keyword-spacing': 'off'
   }
 }

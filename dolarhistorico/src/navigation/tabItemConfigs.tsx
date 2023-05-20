@@ -1,5 +1,9 @@
-import { HomeScreen, SettingsScreen } from '../screens'
+import { Button, Text, View } from 'react-native'
+import { CurrencyScreen, HomeScreen, SettingsScreen } from '../screens'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { createStackNavigator } from '@react-navigation/stack'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import { GoBackButton } from '../components'
 
 interface tabBarIconParameters {
     focused: boolean
@@ -11,26 +15,72 @@ const template = {
     tabBarActiveBackgroundColor: '#f7f7f7'
 }
 
+const HomeStack = createStackNavigator<any>()
+
+const HomeStackScreen: React.FC = () => {
+    return (
+        <HomeStack.Navigator
+            screenOptions={{
+                gestureEnabled: false
+            }}
+        >
+            <HomeStack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{
+                    title: 'Inicio'
+                }}
+            />
+            <HomeStack.Screen
+                name="Currency"
+                component={CurrencyScreen}
+                options={{
+                    headerLeft: GoBackButton
+                }}
+            />
+        </HomeStack.Navigator>
+    )
+}
+
+const SettingsStack = createStackNavigator()
+
+const SettingsStackScreen: React.FC = () => {
+    return (
+        <SettingsStack.Navigator
+            screenOptions={{
+                gestureEnabled: false
+            }}
+        >
+            <SettingsStack.Screen
+                name="Settings"
+                component={SettingsScreen}
+                options={{
+                    title: 'Ajustes'
+                }}
+            />
+        </SettingsStack.Navigator>
+    )
+}
+
 export const tabItemConfigs = [
     {
-        name: 'Home',
-        component: HomeScreen,
+        name: 'HomeStack',
+        component: HomeStackScreen,
         options: {
             tabBarIcon: ({ focused, size }: tabBarIconParameters) => (
                 <Icon name={focused ? 'home' : 'home-outline'} size={size} />
             ),
-            title: 'Inicio',
             ...template
         }
     },
     {
-        name: 'Settings',
-        component: HomeScreen,
+        name: 'SettingsStack',
+        component: SettingsStackScreen,
+
         options: {
             tabBarIcon: ({ focused, size }: tabBarIconParameters) => (
                 <Icon name={focused ? 'settings' : 'settings-outline'} size={size} />
             ),
-            title: 'Configuración',
             ...template
         }
     }
