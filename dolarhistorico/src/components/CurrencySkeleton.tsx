@@ -8,16 +8,8 @@ interface Props {
 }
 
 export const CurrencySkeleton: React.FC<Props> = ({ height = 74, backgroundColor = '#fff', color = '#000', marginVertical = 0 }: Props) => {
-    const theme = useColorScheme()
-    const background = backgroundColor === '#fff'
-        ? (theme === 'light'
-            ? '#fff'
-            : '#333'
-        )
-        : backgroundColor
-
     return (
-        <View style={[styles.container, { height, backgroundColor: background, marginVertical }]}>
+        <View style={[styles.container, { height, backgroundColor, marginVertical }]}>
             <ActivityIndicator color={color} />
         </View>
     )
