@@ -1,14 +1,15 @@
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { type NavigationProp, useNavigation, useRoute } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { useCurrency } from '../hooks/useCurrency'
 import { type Currency } from '../d.types'
 import { Chart } from '../components'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { ScrollView } from 'react-native-gesture-handler'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 export const CurrencyScreen: React.FC = () => {
     const { params } = useRoute<any>()
-    const navigation = useNavigation()
+    const navigation = useNavigation<NavigationProp<any>>()
 
     useEffect(() => {
         navigation.setOptions({
@@ -19,16 +20,21 @@ export const CurrencyScreen: React.FC = () => {
     const [currency] = useState<Currency>(params.currency)
     const { data } = useCurrency({ currency })
     const numericVariation = (parseFloat(currency.variacion.replace(',', '.')) * parseFloat(currency.valorCierreAnterior.replace(',', '.')) / 100).toFixed(2).replace('.', ',')
+    const [valueClicked, setValueClicked] = useState<{ x: number, y: string }>({ x: 0, y: '' })
 
     return (
-        <View style={styles.container}>
+        <ScrollView contentContainerStyle={styles.container}>
             <View style={{ gap: 10 }}>
 
-                <Text style={styles.sectionTitle}>RESUMEN DE SEMANA</Text>
-                <View style={styles.section}>
-
+                <Text style={styles.sectionTitle}>RESUMEN GRÁFICO</Text>
+                <View style={styles.sectionLine}>
+                    <View style={{ gap: 5 }}>
+                        <Text style={styles.sectionLineTitle}>Cotización venta</Text>
+                        <Text style={styles.sectionLineDate}>{valueClicked.y || currency.fecha}</Text>
+                    </View>
+                    <Text style={styles.sectionLineValue}>{valueClicked.x || currency.venta}</Text>
                 </View>
-                <Chart data={data} classVariacion={currency.classVariacion} />
+                <Chart data={data} classVariacion={currency.classVariacion} setValueClicked={setValueClicked} />
             </View>
 
             <View style={{ gap: 10 }}>
@@ -58,9 +64,21 @@ export const CurrencyScreen: React.FC = () => {
                         </View>
                         <Text style={styles.sectionLineValue}>{parseFloat(currency.maximo.replace(',', '.')).toFixed(2).replace('.', ',')}</Text>
                     </View>
+                    <TouchableOpacity
+                        style={styles.sectionLine}
+                        activeOpacity={0.5}
+                        onPress={() => { navigation.navigate('SearchScreen', { name: currency.nombre }) }}
+                    >
+                        <Text style={styles.sectionLineTitle}>Buscar cotización por fecha</Text>
+                        <Icon
+                            name="chevron-forward-outline"
+                            size={20}
+                            color="#aaa"
+                        />
+                    </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 

@@ -1,5 +1,5 @@
 import { Button, Text, View } from 'react-native'
-import { CurrencyScreen, HomeScreen, SettingsScreen } from '../screens'
+import { CurrencyScreen, HomeScreen, SearchResultsScreen, SearchScreen, SettingsScreen } from '../screens'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { createStackNavigator } from '@react-navigation/stack'
 import { TouchableOpacity } from 'react-native-gesture-handler'
@@ -35,6 +35,22 @@ const HomeStackScreen: React.FC = () => {
                 name="Currency"
                 component={CurrencyScreen}
                 options={{
+                    headerLeft: GoBackButton
+                }}
+            />
+            <HomeStack.Screen
+                name="SearchScreen"
+                component={SearchScreen}
+                options={{
+                    title: 'Buscar cotización por fecha',
+                    headerLeft: GoBackButton
+                }}
+            />
+            <HomeStack.Screen
+                name="SearchResultsScreen"
+                component={SearchResultsScreen}
+                options={{
+                    title: 'Resultados de busqueda',
                     headerLeft: GoBackButton
                 }}
             />

@@ -1,3 +1,5 @@
 export * from './HomeScreen'
 export * from './SettingsScreen'
 export * from './CurrencyScreen'
+export * from './SearchScreen'
+export * from './SearchResultsScreen'

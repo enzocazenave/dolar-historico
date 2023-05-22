@@ -39,7 +39,7 @@ export const Currency: React.FC<CurrencyProps> = ({ nombre, compra, venta, fecha
                 <Text
                     style={[
                         styles.variacion,
-                        { color: classVariacion === 'up' ? '#00B982' : '#CD261C' },
+                        { color: classVariacion === 'up' ? '#CD261C' : '#00B982' },
                         numericVariation === '0.00' && { color: '#0337e6' }
                     ]}
                 >
