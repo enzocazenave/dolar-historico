@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View, useColorScheme } from 'react-native'
 import { useCurrencies } from '../hooks/useCurrencies'
 import { Currency, CurrencySkeleton } from '../components'
 
@@ -20,6 +20,7 @@ export const HomeScreen: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        gap: 15
+        gap: 15,
+        height: '100%'
     }
 })

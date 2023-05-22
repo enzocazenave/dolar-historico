@@ -66,7 +66,7 @@ export const SearchScreen: React.FC = () => {
                 title="Seleccionar desde"
                 confirmText='Confirmar'
                 cancelText='Cancelar'
-                mode="date"
+                mode='date'
                 maximumDate={date.to}
             />
             <DatePicker
@@ -84,7 +84,7 @@ export const SearchScreen: React.FC = () => {
                 title="Seleccionar hasta"
                 confirmText='Confirmar'
                 cancelText='Cancelar'
-                mode="date"
+                mode='date'
                 maximumDate={new Date()}
                 minimumDate={date.from}
             />
