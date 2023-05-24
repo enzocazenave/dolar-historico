@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import { Dimensions } from 'react-native'
 import { LineChart } from 'react-native-chart-kit'
 import { CurrencySkeleton } from './CurrencySkeleton'
-import { obtenerElementosSeparados } from '../helpers'
 
 interface Props {
     data: Array<[string, number]>
@@ -21,7 +20,7 @@ export const Chart: React.FC<Props> = ({ data, classVariacion, setValueClicked }
         if (!data || data.length === 0) return {}
 
         return {
-            labels: data.map((quote) => quote[0].slice(0, 5) + '/' + quote[0].slice(8, 10)),
+            labels: data.map((quote) => quote[0].slice(0, 5)),
             quotes: data.map((quote) => quote[1])
         }
     }, [data])

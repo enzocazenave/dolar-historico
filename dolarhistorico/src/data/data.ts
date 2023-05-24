@@ -5,5 +5,7 @@ export const CURRENCIES_ENDPOINTS: string[] = [
     'oficial:dolar/oficial/',
     'CCL:dolarrava/cl/',
     'turista:dolarturista/',
-    'qatar:dolarqatar/'
+    'qatar:dolarqatar/',
+    'MEP:dolarrava/mep/',
+    'ahorro:dolarahorro/'
 ]

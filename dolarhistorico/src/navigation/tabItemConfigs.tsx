@@ -2,8 +2,8 @@ import { Button, Text, View } from 'react-native'
 import { CurrencyScreen, HomeScreen, SearchResultsScreen, SearchScreen, SettingsScreen } from '../screens'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { createStackNavigator } from '@react-navigation/stack'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { GoBackButton } from '../components'
+import { type RouteProp, useRoute, useNavigation, type NavigationProp } from '@react-navigation/native'
 
 interface tabBarIconParameters {
     focused: boolean

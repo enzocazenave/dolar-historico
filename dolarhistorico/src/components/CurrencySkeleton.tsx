@@ -7,7 +7,12 @@ interface Props {
     marginVertical?: number
 }
 
-export const CurrencySkeleton: React.FC<Props> = ({ height = 74, backgroundColor = '#fff', color = '#000', marginVertical = 0 }: Props) => {
+export const CurrencySkeleton: React.FC<Props> = ({
+    height = 74,
+    backgroundColor = '#fff',
+    color = '#000',
+    marginVertical = 0
+}: Props) => {
     return (
         <View style={[styles.container, { height, backgroundColor, marginVertical }]}>
             <ActivityIndicator color={color} />

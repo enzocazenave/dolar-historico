@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { type Currency } from '../d.types'
 import { API_URL, CURRENCIES_ENDPOINTS } from '../data/data'
+import { useNavigation, type NavigationProp } from '@react-navigation/native'
+import { HomeHeaderRight } from '../components'
 
 type useCurrenciesMethods = () => {
     loading: boolean
@@ -12,6 +14,13 @@ export const useCurrencies: useCurrenciesMethods = () => {
     const [currencies, setCurrencies] = useState<Currency[]>([])
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string>('')
+    const navigation = useNavigation<NavigationProp<any>>()
+
+    useEffect(() => {
+        navigation.setOptions({
+            headerRight: () => <HomeHeaderRight onPress={refreshCurrencies} />
+        })
+    }, [])
 
     useEffect(() => {
         getCurrencies()
@@ -22,6 +31,18 @@ export const useCurrencies: useCurrenciesMethods = () => {
                 setLoading(false)
             })
     }, [])
+
+    const refreshCurrencies: () => void = () => {
+        setLoading(true)
+
+        getCurrencies()
+            .then(data => {
+                if (data !== undefined) setCurrencies(data)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+    }
 
     const getCurrencies: () => Promise<Currency[] | undefined> = async () => {
         try {
