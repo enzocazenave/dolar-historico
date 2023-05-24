@@ -1,6 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, useColorScheme } from 'react-native'
 import { type Currency as CurrencyProps } from '../d.types'
 import { useNavigation, type NavigationProp } from '@react-navigation/native'
+import { colors } from '../data/colors'
 
 export const Currency: React.FC<CurrencyProps> = ({ nombre, compra, venta, fecha, variacion, valor_cierre_ant: valorCierreAnterior, 'class-variacion': classVariacion, maximo, fecha_maximo: fechaMaximo }: CurrencyProps) => {
     const navigator = useNavigation<NavigationProp<any>>()
@@ -9,10 +10,11 @@ export const Currency: React.FC<CurrencyProps> = ({ nombre, compra, venta, fecha
     const numericVariation = (parseFloat(variacion.replace(',', '.')) * parseFloat(valorCierreAnterior.replace(',', '.')) / 100).toFixed(2)
     const hour = fecha.split('-')[1]
     const showTodayOrDate = parseInt(fecha.split('/')[0]) === (new Date().getDate())
+    const theme = useColorScheme()
 
     return (
         <TouchableOpacity
-            style={styles.container}
+            style={[styles.container, { backgroundColor: colors[theme].background2 }]}
             activeOpacity={0.5}
             onPress={() => {
                 navigator.navigate('Currency', {
@@ -22,10 +24,10 @@ export const Currency: React.FC<CurrencyProps> = ({ nombre, compra, venta, fecha
             }}
         >
             <View style={styles.line}>
-                <Text style={styles.name}>Dólar {refactoredNombre}</Text>
+                <Text style={[styles.name, { color: colors[theme].color1 }]}>Dólar {refactoredNombre}</Text>
                 <View style={styles.prices}>
-                    <Text style={styles.price}>{compra} - </Text>
-                    <Text style={styles.price}>{venta}</Text>
+                    <Text style={[styles.price, { color: colors[theme].color1 }]}>{compra} - </Text>
+                    <Text style={[styles.price, { color: colors[theme].color1 }]}>{venta}</Text>
                 </View>
             </View>
 

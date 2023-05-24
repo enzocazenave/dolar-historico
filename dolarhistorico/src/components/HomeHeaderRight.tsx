@@ -16,6 +16,7 @@ export const HomeHeaderRight: React.FC<HomeHeaderRightProps> = ({ onPress }: Hom
         setDisabled(true)
         setActiveOpacity(1)
         onPress()
+
         setTimeout(() => {
             setDisabled(false)
             setActiveOpacity(0.5)
