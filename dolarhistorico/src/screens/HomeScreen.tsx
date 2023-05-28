@@ -7,10 +7,13 @@ import { colors } from '../data/colors'
 export const HomeScreen: React.FC = () => {
     const { currencies, loading } = useCurrencies()
     const skeletons = new Array(CURRENCIES_ENDPOINTS.length).fill(1)
-    const theme = useColorScheme()
+    const theme = useColorScheme() ?? 'light'
 
     return (
-        <ScrollView contentContainerStyle={[styles.container, { backgroundColor: colors[theme].background1 }]}>
+        <ScrollView
+            contentContainerStyle={styles.container}
+            style={{ backgroundColor: colors[theme].background1 }}
+        >
             {loading
                 ? skeletons.map((_, index) => <CurrencySkeleton backgroundColor={colors[theme].background2} key={index} />)
                 : currencies.map(currency => <Currency key={currency.nombre} {...currency} />)

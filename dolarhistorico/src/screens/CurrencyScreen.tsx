@@ -1,15 +1,17 @@
 import { type NavigationProp, useNavigation, useRoute } from '@react-navigation/native'
 import { useEffect, useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, useColorScheme } from 'react-native'
 import { useCurrency } from '../hooks/useCurrency'
 import { type Currency } from '../d.types'
 import { Chart } from '../components'
 import { ScrollView } from 'react-native-gesture-handler'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { colors } from '../data/colors'
 
 export const CurrencyScreen: React.FC = () => {
     const { params } = useRoute<any>()
     const navigation = useNavigation<NavigationProp<any>>()
+    const theme = useColorScheme() ?? 'light'
 
     useEffect(() => {
         navigation.setOptions({
@@ -23,13 +25,15 @@ export const CurrencyScreen: React.FC = () => {
     const [valueClicked, setValueClicked] = useState<{ x: number, y: string }>({ x: 0, y: '' })
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView
+            contentContainerStyle={styles.container}
+            style={{ backgroundColor: colors[theme].background1 }}
+        >
             <View style={{ gap: 10 }}>
-
                 <Text style={styles.sectionTitle}>RESUMEN GRÁFICO</Text>
-                <View style={styles.sectionLine}>
+                <View style={[styles.sectionLine, { backgroundColor: colors[theme].background2 }]}>
                     <View style={{ gap: 5 }}>
-                        <Text style={styles.sectionLineTitle}>Cotización venta</Text>
+                        <Text style={[styles.sectionLineTitle, { color: colors[theme].color1 }]}>Cotización venta</Text>
                         <Text style={styles.sectionLineDate}>{valueClicked.y || currency.fecha}</Text>
                     </View>
                     <Text style={styles.sectionLineValue}>{valueClicked.x || currency.venta}</Text>
@@ -40,16 +44,16 @@ export const CurrencyScreen: React.FC = () => {
             <View style={{ gap: 10 }}>
                 <Text style={styles.sectionTitle}>RESUMEN DE JORNADA</Text>
                 <View style={styles.section}>
-                    <View style={styles.sectionLine}>
-                        <Text style={styles.sectionLineTitle}>Variación porcentual</Text>
+                    <View style={[styles.sectionLine, { backgroundColor: colors[theme].background2 }]}>
+                        <Text style={[styles.sectionLineTitle, { color: colors[theme].color1 }]}>Variación porcentual</Text>
                         <Text style={styles.sectionLineValue}>{currency.variacion}</Text>
                     </View>
-                    <View style={styles.sectionLine}>
-                        <Text style={styles.sectionLineTitle}>Variación numerica</Text>
+                    <View style={[styles.sectionLine, { backgroundColor: colors[theme].background2 }]}>
+                        <Text style={[styles.sectionLineTitle, { color: colors[theme].color1 }]}>Variación numerica</Text>
                         <Text style={styles.sectionLineValue}>{numericVariation}</Text>
                     </View>
-                    <View style={styles.sectionLine}>
-                        <Text style={styles.sectionLineTitle}>Cierre anterior</Text>
+                    <View style={[styles.sectionLine, { backgroundColor: colors[theme].background2 }]}>
+                        <Text style={[styles.sectionLineTitle, { color: colors[theme].color1 }]}>Cierre anterior</Text>
                         <Text style={styles.sectionLineValue}>{currency.valorCierreAnterior}</Text>
                     </View>
                 </View>
@@ -57,19 +61,19 @@ export const CurrencyScreen: React.FC = () => {
             <View style={{ gap: 10 }}>
                 <Text style={styles.sectionTitle}>HISTORIAL</Text>
                 <View style={styles.section}>
-                    <View style={styles.sectionLine}>
+                    <View style={[styles.sectionLine, { backgroundColor: colors[theme].background2 }]}>
                         <View style={{ gap: 5 }}>
-                            <Text style={styles.sectionLineTitle}>Máximo histórico</Text>
+                            <Text style={[styles.sectionLineTitle, { color: colors[theme].color1 }]}>Máximo histórico</Text>
                             <Text style={styles.sectionLineDate}>{currency.fechaMaximo}</Text>
                         </View>
                         <Text style={styles.sectionLineValue}>{parseFloat(currency.maximo.replace(',', '.')).toFixed(2).replace('.', ',')}</Text>
                     </View>
                     <TouchableOpacity
-                        style={styles.sectionLine}
+                        style={[styles.sectionLine, { backgroundColor: colors[theme].background2 }]}
                         activeOpacity={0.5}
                         onPress={() => { navigation.navigate('SearchScreen', { name: currency.nombre }) }}
                     >
-                        <Text style={styles.sectionLineTitle}>Buscar cotización por fecha</Text>
+                        <Text style={[styles.sectionLineTitle, { color: colors[theme].color1 }]}>Buscar cotización por fecha</Text>
                         <Icon
                             name="chevron-forward-outline"
                             size={20}

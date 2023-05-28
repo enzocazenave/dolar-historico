@@ -1,9 +1,11 @@
 import { useNavigation } from '@react-navigation/native'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, useColorScheme } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { colors } from '../data/colors'
 
 export const GoBackButton: React.FC = () => {
     const navigation = useNavigation()
+    const theme = useColorScheme() ?? 'light'
 
     return (
         <TouchableOpacity
@@ -15,6 +17,7 @@ export const GoBackButton: React.FC = () => {
             <Icon
                 name="arrow-back-outline"
                 size={20}
+                color={colors[theme === 'dark' ? 'light' : 'dark'].background1}
             />
         </TouchableOpacity>
     )

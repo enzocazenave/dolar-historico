@@ -12,7 +12,7 @@ const template = {
 const HomeStack = createStackNavigator<any>()
 
 export const HomeStackScreen: React.FC = () => {
-    const theme = useColorScheme()
+    const theme = useColorScheme() ?? 'light'
 
     return (
         <HomeStack.Navigator >
@@ -22,7 +22,7 @@ export const HomeStackScreen: React.FC = () => {
                 options={{
                     title: 'Inicio',
                     headerStyle: {
-                        backgroundColor: colors[theme].background2,
+                        backgroundColor: colors[theme].background2
                     },
                     headerTitleStyle: {
                         color: colors[theme].color1
@@ -33,7 +33,13 @@ export const HomeStackScreen: React.FC = () => {
                 name="Currency"
                 component={CurrencyScreen}
                 options={{
-                    headerLeft: GoBackButton
+                    headerLeft: GoBackButton,
+                    headerStyle: {
+                        backgroundColor: colors[theme].background2
+                    },
+                    headerTitleStyle: {
+                        color: colors[theme].color1
+                    }
                 }}
             />
             <HomeStack.Screen
@@ -41,7 +47,13 @@ export const HomeStackScreen: React.FC = () => {
                 component={SearchScreen}
                 options={{
                     title: 'Buscar cotización por fecha',
-                    headerLeft: GoBackButton
+                    headerLeft: GoBackButton,
+                    headerStyle: {
+                        backgroundColor: colors[theme].background2
+                    },
+                    headerTitleStyle: {
+                        color: colors[theme].color1
+                    }
                 }}
             />
             <HomeStack.Screen
@@ -49,7 +61,13 @@ export const HomeStackScreen: React.FC = () => {
                 component={SearchResultsScreen}
                 options={{
                     title: 'Resultados de busqueda',
-                    headerLeft: GoBackButton
+                    headerLeft: GoBackButton,
+                    headerStyle: {
+                        backgroundColor: colors[theme].background2
+                    },
+                    headerTitleStyle: {
+                        color: colors[theme].color1
+                    }
                 }}
             />
         </HomeStack.Navigator>

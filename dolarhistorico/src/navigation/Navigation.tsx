@@ -12,8 +12,7 @@ interface tabBarIconParameters {
 }
 
 export const Navigation: React.FC = () => {
-    const theme = useColorScheme()
-    console.log(theme)
+    const theme = useColorScheme() ?? 'light'
 
     return (
         <BottomTab.Navigator

@@ -1,8 +1,9 @@
 import { type RouteProp, useRoute } from '@react-navigation/native'
-import { FlatList, FlatListProps, StyleSheet, Text, View } from 'react-native'
+import { FlatList, FlatListProps, StyleSheet, Text, View, useColorScheme } from 'react-native'
 import { useSearch } from '../hooks/useSearch'
 import { useEffect } from 'react'
 import { CurrencySkeleton } from '../components'
+import { colors } from '../data/colors'
 
 interface Props {
     date: string
@@ -11,16 +12,19 @@ interface Props {
 }
 
 const Item: React.FC<Props> = ({ date, compra, venta }: Props) => {
+    const theme = useColorScheme() ?? 'light'
+
     return (
-        <View style={styles.itemContainer}>
-            <Text style={styles.itemContainerDate}>{date}</Text>
-            <Text style={styles.itemContainerValues}>{compra} - {venta}</Text>
+        <View style={[styles.itemContainer, { backgroundColor: colors[theme].background2 }]}>
+            <Text style={[styles.itemContainerDate, { color: colors[theme].color2 }]}>{date}</Text>
+            <Text style={[styles.itemContainerValues, { color: colors[theme].color1 }]}>{compra} - {venta}</Text>
         </View>
     )
 }
 
 export const SearchResultsScreen: React.FC = () => {
     const { params } = useRoute<RouteProp<any>>()
+    const theme = useColorScheme() ?? 'light'
 
     const { data, loading } = useSearch({
         from: params?.from,
@@ -31,9 +35,9 @@ export const SearchResultsScreen: React.FC = () => {
     return (
         <>
             {loading
-                ? <View style={{ padding: 20, borderRadius: 10 }}><CurrencySkeleton backgroundColor='#fff' height={50} /></View>
+                ? <View style={{ padding: 20, borderRadius: 10 }}><CurrencySkeleton backgroundColor={colors[theme].background1} height={50} /></View>
                 : (
-                    <View style={styles.container}>
+                    <View style={[styles.container, { backgroundColor: colors[theme].background1 }]}>
                         {data.length > 0
                             ? (
                                 <FlatList
@@ -57,7 +61,8 @@ export const SearchResultsScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        padding: 20,
+        height: '100%'
     },
     flat: {
         gap: 10

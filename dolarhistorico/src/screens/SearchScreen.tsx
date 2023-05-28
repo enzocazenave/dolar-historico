@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, useColorScheme } from 'react-native'
 import DatePicker from 'react-native-date-picker'
 import { type RouteProp, useRoute, useNavigation, type NavigationProp } from '@react-navigation/native'
+import { colors } from '../data/colors'
 
 export const SearchScreen: React.FC = () => {
     const [date, setDate] = useState({
@@ -22,31 +23,33 @@ export const SearchScreen: React.FC = () => {
 
     const condition = formatDate(date.to, 'show') !== formatDate(date.from, 'show')
 
+    const theme = useColorScheme() ?? 'light'
+
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: colors[theme].background1 }]}>
             <TouchableOpacity
                 activeOpacity={0.6}
                 onPress={() => { setOpenFrom(true) }}
-                style={styles.datePicker}
+                style={[styles.datePicker, { backgroundColor: colors[theme].background2 }]}
             >
-                <Text style={styles.datePickerText}>Seleccionar fecha desde</Text>
-                <Text>{formatDate(date.from, 'show')}</Text>
+                <Text style={[styles.datePickerText, { color: colors[theme].color1 }]}>Seleccionar fecha desde</Text>
+                <Text style={{ color: colors[theme].color2 }}>{formatDate(date.from, 'show')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 activeOpacity={0.6}
                 onPress={() => { setOpenTo(true) }}
-                style={styles.datePicker}
+                style={[styles.datePicker, { backgroundColor: colors[theme].background2 }]}
             >
-                <Text style={styles.datePickerText}>Seleccionar fecha hasta</Text>
-                <Text>{formatDate(date.to, 'show')}</Text>
+                <Text style={[styles.datePickerText, { color: colors[theme].color1 }]}>Seleccionar fecha hasta</Text>
+                <Text style={{ color: colors[theme].color2 }}>{formatDate(date.to, 'show')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 disabled={!condition}
                 activeOpacity={0.6}
-                style={[styles.datePicker, { backgroundColor: '#ddd' }]}
+                style={[styles.datePicker, { backgroundColor: colors[theme].background2 }]}
                 onPress={() => { navigation.navigate('SearchResultsScreen', { from: formatDate(date.from, 'request'), to: formatDate(date.to, 'request'), name: params?.name }) }}
             >
-                <Text style={[styles.textButton, !condition && { color: '#aaa' }]}>Buscar</Text>
+                <Text style={[styles.textButton, { color: colors[theme].color1 }, !condition && { color: '#aaa' }]}>Buscar</Text>
             </TouchableOpacity>
 
             {!condition && <View style={styles.error}><Text style={styles.errorText}>Las fechas de busqueda no pueden ser iguales</Text></View>}
@@ -95,7 +98,8 @@ export const SearchScreen: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        gap: 10
+        gap: 10,
+        height: '100%'
     },
     datePicker: {
         flexDirection: 'row',

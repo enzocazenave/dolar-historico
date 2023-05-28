@@ -10,7 +10,7 @@ export const Currency: React.FC<CurrencyProps> = ({ nombre, compra, venta, fecha
     const numericVariation = (parseFloat(variacion.replace(',', '.')) * parseFloat(valorCierreAnterior.replace(',', '.')) / 100).toFixed(2)
     const hour = fecha.split('-')[1]
     const showTodayOrDate = parseInt(fecha.split('/')[0]) === (new Date().getDate())
-    const theme = useColorScheme()
+    const theme = useColorScheme() ?? 'light'
 
     return (
         <TouchableOpacity
