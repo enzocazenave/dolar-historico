@@ -17,33 +17,27 @@ export const HomeStackScreen: React.FC = () => {
     return (
         <HomeStack.Navigator
             screenOptions={{
-                headerShadowVisible: false
+                headerShadowVisible: false,
+                headerStyle: {
+                    backgroundColor: colors[theme].background2
+                },
+                headerTitleStyle: {
+                    color: colors[theme].color1
+                }
             }}
         >
             <HomeStack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
-                    title: 'Inicio',
-                    headerStyle: {
-                        backgroundColor: colors[theme].background2
-                    },
-                    headerTitleStyle: {
-                        color: colors[theme].color1
-                    }
+                    title: 'Inicio'
                 }}
             />
             <HomeStack.Screen
                 name="Currency"
                 component={CurrencyScreen}
                 options={{
-                    headerLeft: GoBackButton,
-                    headerStyle: {
-                        backgroundColor: colors[theme].background2
-                    },
-                    headerTitleStyle: {
-                        color: colors[theme].color1
-                    }
+                    headerLeft: GoBackButton
                 }}
             />
             <HomeStack.Screen
@@ -51,13 +45,7 @@ export const HomeStackScreen: React.FC = () => {
                 component={SearchScreen}
                 options={{
                     title: 'Buscar cotización por fecha',
-                    headerLeft: GoBackButton,
-                    headerStyle: {
-                        backgroundColor: colors[theme].background2
-                    },
-                    headerTitleStyle: {
-                        color: colors[theme].color1
-                    }
+                    headerLeft: GoBackButton
                 }}
             />
             <HomeStack.Screen
@@ -65,13 +53,7 @@ export const HomeStackScreen: React.FC = () => {
                 component={SearchResultsScreen}
                 options={{
                     title: 'Resultados de busqueda',
-                    headerLeft: GoBackButton,
-                    headerStyle: {
-                        backgroundColor: colors[theme].background2
-                    },
-                    headerTitleStyle: {
-                        color: colors[theme].color1
-                    }
+                    headerLeft: GoBackButton
                 }}
             />
         </HomeStack.Navigator>
@@ -81,11 +63,19 @@ export const HomeStackScreen: React.FC = () => {
 const SettingsStack = createStackNavigator()
 
 export const SettingsStackScreen: React.FC = () => {
+    const theme = useColorScheme() ?? 'light'
+
     return (
         <SettingsStack.Navigator
             screenOptions={{
                 gestureEnabled: false,
-                headerShadowVisible: false
+                headerShadowVisible: false,
+                headerStyle: {
+                    backgroundColor: colors[theme].background2
+                },
+                headerTitleStyle: {
+                    color: colors[theme].color1
+                }
             }}
         >
             <SettingsStack.Screen
