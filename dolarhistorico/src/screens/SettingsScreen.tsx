@@ -6,7 +6,15 @@ export const SettingsScreen: React.FC = () => {
     const theme = useColorScheme() ?? 'light'
 
     const navigateToGithub: () => void = () => {
-        const url = 'https://github.com/enzocazenave'
+        const url = 'https://github.com/enzocazenave/'
+
+        void Linking.canOpenURL(url).then(supported => {
+            if (supported) void Linking.openURL(url)
+        })
+    }
+
+    const navigateToAmbito: () => void = () => {
+        const url = 'https://www.ambito-dolar.app/'
 
         void Linking.canOpenURL(url).then(supported => {
             if (supported) void Linking.openURL(url)
@@ -15,11 +23,19 @@ export const SettingsScreen: React.FC = () => {
 
     return (
         <View style={[styles.container, { backgroundColor: colors[theme].background1 }]}>
-            <View style={[styles.copyrights, { backgroundColor: colors[theme].background2 }]}>
-                <Text style={{ color: colors[theme].color1 }}>
+            <TouchableOpacity
+                style={[styles.copyrights, { backgroundColor: colors[theme].background2 }]}
+                onPress={navigateToAmbito}
+            >
+                <Text style={{ color: colors[theme].color1, maxWidth: '90%' }}>
                     Aplicación desarrollada con fines de aprendizaje y basada en <Text style={{ color: theme === 'dark' ? '#9f9' : '#00f' }}>Ámbito Dólar</Text>, que es otra aplicación que se utiliza para visualizar las cotizaciones del dólar.
                 </Text>
-            </View>
+                <Icon
+                    name="chevron-forward-outline"
+                    size={20}
+                    color="#aaa"
+                />
+            </TouchableOpacity>
             <TouchableOpacity
                 style={[styles.copyrights, { backgroundColor: colors[theme].background2 }]}
                 onPress={navigateToGithub}
