@@ -7,7 +7,7 @@ export const colors = {
     },
     dark: {
         background1: '#000',
-        background2: '#070707',
+        background2: '#121212',
         color1: '#fff',
         color2: '#aaa'
     }

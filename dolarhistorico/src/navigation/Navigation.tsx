@@ -18,7 +18,7 @@ export const Navigation: React.FC = () => {
         <BottomTab.Navigator
             screenOptions={{
                 headerShown: false,
-                tabBarStyle: { backgroundColor: colors[theme].background2 }
+                tabBarStyle: { backgroundColor: colors[theme].background2, borderTopColor: 'rgba(0,0,0,0.0)' }
             }}>
             <BottomTab.Screen
                 name='HomeStack'

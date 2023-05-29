@@ -45,7 +45,7 @@ export const Currency: React.FC<CurrencyProps> = ({ nombre, compra, venta, fecha
                         numericVariation === '0.00' && { color: '#0337e6' }
                     ]}
                 >
-                    {classVariacion === 'up' && '+'} {numericVariation.toString().replace('.', ',')} ({classVariacion === 'up' && '+'}{variacion}) {classVariacion === 'equal' ? '＝' : (classVariacion === 'up' ? '↑' : '↓')}
+                    {classVariacion === 'up' && '+'} {numericVariation.toString().replace('.', ',')} ({classVariacion === 'up' && '+'}{variacion}) {numericVariation === '0.00' ? '＝' : (classVariacion === 'up' ? '↑' : '↓')}
                 </Text>
             </View>
         </TouchableOpacity>

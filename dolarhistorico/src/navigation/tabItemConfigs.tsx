@@ -15,7 +15,11 @@ export const HomeStackScreen: React.FC = () => {
     const theme = useColorScheme() ?? 'light'
 
     return (
-        <HomeStack.Navigator >
+        <HomeStack.Navigator
+            screenOptions={{
+                headerShadowVisible: false
+            }}
+        >
             <HomeStack.Screen
                 name="Home"
                 component={HomeScreen}
@@ -80,7 +84,8 @@ export const SettingsStackScreen: React.FC = () => {
     return (
         <SettingsStack.Navigator
             screenOptions={{
-                gestureEnabled: false
+                gestureEnabled: false,
+                headerShadowVisible: false
             }}
         >
             <SettingsStack.Screen

@@ -35,7 +35,7 @@ export const SearchResultsScreen: React.FC = () => {
     return (
         <>
             {loading
-                ? <View style={{ padding: 20, borderRadius: 10 }}><CurrencySkeleton backgroundColor={colors[theme].background1} height={50} /></View>
+                ? <View style={[styles.container, { backgroundColor: colors[theme].background1 }]}><CurrencySkeleton backgroundColor={colors[theme].background2} color={colors[theme].color1} height={50} /></View>
                 : (
                     <View style={[styles.container, { backgroundColor: colors[theme].background1 }]}>
                         {data.length > 0
