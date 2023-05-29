@@ -27,8 +27,7 @@ export const Navigation: React.FC = () => {
                     tabBarIcon: ({ focused, size }: tabBarIconParameters) => (
                         <Icon name={focused ? 'home' : 'home-outline'} size={size} color={colors[theme].color1} />
                     ),
-                    tabBarShowLabel: false,
-                    tabBarActiveBackgroundColor: colors[theme].background1
+                    tabBarShowLabel: false
                 }}
             />
             <BottomTab.Screen
@@ -38,8 +37,7 @@ export const Navigation: React.FC = () => {
                     tabBarIcon: ({ focused, size }: tabBarIconParameters) => (
                         <Icon name={focused ? 'settings' : 'settings-outline'} size={size} color={colors[theme].color1} />
                     ),
-                    tabBarShowLabel: false,
-                    tabBarActiveBackgroundColor: colors[theme].background1
+                    tabBarShowLabel: false
                 }}
             />
         </BottomTab.Navigator>
