@@ -1,7 +1,6 @@
 import { type RouteProp, useRoute } from '@react-navigation/native'
-import { FlatList, FlatListProps, StyleSheet, Text, View, useColorScheme } from 'react-native'
+import { FlatList, StyleSheet, Text, View, useColorScheme } from 'react-native'
 import { useSearch } from '../hooks/useSearch'
-import { useEffect } from 'react'
 import { CurrencySkeleton } from '../components'
 import { colors } from '../data/colors'
 
